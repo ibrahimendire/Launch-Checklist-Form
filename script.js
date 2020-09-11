@@ -12,25 +12,24 @@ fetch("https://handlers.education.launchcode.org/static/planets.json")
 
 window.addEventListener("load", function () {
    let form = document.querySelector("form");
+   let pilotStatus = document.getElementById("pilotStatus");
+   let copilotStatus = document.getElementById("copilotStatus");
+   let fuelStatus = document.getElementById("fuelStatus");
+   let cargoStatus = document.getElementById("cargoStatus");
    form.addEventListener("submit", function (event) {
       event.preventDefault();
       let pilotNameInput = document.querySelector("input[name=pilotName]");
       let copilotNameInput = document.querySelector("input[name=copilotName]");
       let fuelLevelInLitter = document.querySelector("input[name=fuelLevel]");
-      //let fuelLevelInLitter = Number(fuelLevelInLitter.value)
       let cargoMassInKg = document.querySelector("input[name=cargoMass]");
-      //let cargoMassInKg = Number(cargoMassInKg.value)
       let launchStatus = document.getElementById("launchStatus");
       let faultyItems = document.getElementById("faultyItems");
-      let pilotStatus = document.getElementById("pilotStatus");
-      let copilotStatus = document.getElementById("copilotStatus");
-      let fuelStatus = document.getElementById("fuelStatus");
-      let cargoStatus = document.getElementById("cargoStatus");
+
 
       pilotStatus.innerHTML = `Pilot: ${pilotNameInput.value} is Ready`
       copilotStatus.innerHTML = `Co-pilot: ${copilotNameInput.value} is Ready`
-      fuelStatus.innerHTML = `Fuel level: ${fuelLevelInLitter.value} litter enough for launch`
-      cargoStatus.innerHTML = `Cargo mass: ${cargoMassInKg.value} Kg Cargo mass low enough for launch`
+      fuelStatus.innerHTML = `Fuel level high enough for launch`
+      cargoStatus.innerHTML = `Cargo mass low enough for launch`
 
       if (pilotNameInput.value === "" ||
          copilotNameInput.value === "" ||
@@ -46,14 +45,14 @@ window.addEventListener("load", function () {
          event.preventDefault();
       } else {
          if (fuelLevelInLitter.value < 10000) {
-            fuelStatus.innerHTML = `${fuelLevelInLitter.value} litter   is too low for launch`
+            fuelStatus.innerHTML = `Fuel level too low for launch`
             fuelStatus.style.color = "red"
             launchStatus.innerHTML = "Shuttle is Not ready for launch"
             launchStatus.style.color = "red";
             faultyItems.style.visibility = "visible";
             event.preventDefault();
          } if (cargoMassInKg.value > 10000) {
-            cargoStatus.innerHTML = `${cargoMassInKg.value} Kg Cargo mass  is to high for launch`
+            cargoStatus.innerHTML = `Cargo mass too high for launch`
             cargoStatus.style.color = "red"
             launchStatus.innerHTML = "Shuttle is Not ready for launch"
             launchStatus.style.color = "red";
@@ -68,9 +67,9 @@ window.addEventListener("load", function () {
             event.preventDefault();
          }
 
-      let object = result[Math.floor(Math.random() * result.length)];
-      let missionTarget = document.getElementById("missionTarget");
-      missionTarget.innerHTML = `<h2>Mission Destination</h2>
+         let object = result[Math.floor(Math.random() * result.length)];
+         let missionTarget = document.getElementById("missionTarget");
+         missionTarget.innerHTML = `<h2>Mission Destination</h2>
     <ol>
     <li>Name: ${object.name}</li>
     <li>Diameter: ${object.diameter}</li>
